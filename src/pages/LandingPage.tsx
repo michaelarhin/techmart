@@ -32,7 +32,6 @@ import {
 import { getListings, getCategories, getPlatformStats } from '../lib/supabase';
 import { fadeUp, stagger, item, viewportOnce, EASE, springSnappy } from '../lib/motion';
 import ListingCard from '../components/ListingCard';
-import Typewriter from '../components/Typewriter';
 import { HERO_SLIDES } from '../lib/heroImages';
 import type { Listing, Category } from '../types';
 
@@ -175,6 +174,75 @@ const HeroSlideshow = ({ listings }: { listings: Listing[] }) => {
   );
 };
 
+const HEADLINES = [
+  'Buy & sell tech\nwithout the noise.',
+  'Your next upgrade\nis one tap away.',
+  'Trade gear with\npeople you trust.',
+  'List it. Sell it.\nThat simple.',
+  'Tech finds a new\nhome every day.',
+];
+
+const RotatingHeadline = () => {
+  const [index, setIndex] = useState(0);
+  const [displayText, setDisplayText] = useState('');
+  const [, setIsTyping] = useState(true);
+
+  useEffect(() => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      setDisplayText(HEADLINES[0]);
+      return;
+    }
+
+    let charIndex = 0;
+    let timeout: ReturnType<typeof setTimeout>;
+    const currentText = HEADLINES[index];
+
+    const type = () => {
+      charIndex++;
+      setDisplayText(currentText.slice(0, charIndex));
+      if (charIndex < currentText.length) {
+        timeout = setTimeout(type, 45);
+      } else {
+        setIsTyping(false);
+        timeout = setTimeout(() => {
+          erase();
+        }, 3000);
+      }
+    };
+
+    const erase = () => {
+      setIsTyping(true);
+      const eraseStep = () => {
+        charIndex--;
+        setDisplayText(currentText.slice(0, charIndex));
+        if (charIndex > 0) {
+          timeout = setTimeout(eraseStep, 25);
+        } else {
+          setIndex((i) => (i + 1) % HEADLINES.length);
+        }
+      };
+      eraseStep();
+    };
+
+    timeout = setTimeout(type, 400);
+    return () => clearTimeout(timeout);
+  }, [index]);
+
+  return (
+    <span className="relative inline-block whitespace-pre-line">
+      <span className="invisible" aria-hidden="true">
+        {HEADLINES.reduce((a, b) => (a.length > b.length ? a : b))}
+      </span>
+      <span className="absolute inset-0" aria-hidden="true">
+        {displayText}
+        <span className="type-caret" />
+      </span>
+      <span className="sr-only">{HEADLINES[index]}</span>
+    </span>
+  );
+};
+
 const LandingPage = () => {
   const [listings, setListings] = useState<Listing[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -218,13 +286,18 @@ const LandingPage = () => {
             variants={item}
             className="lg:col-span-7 surface rounded-4xl p-7 sm:p-10 lg:p-12 relative overflow-hidden flex flex-col"
           >
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full surface-muted text-xs font-semibold text-ink-soft w-fit">
-              <span className="w-1.5 h-1.5 rounded-full bg-lime-dark" />
-              The calm tech marketplace
-            </span>
+            <div className="flex items-center gap-2.5 w-fit">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-lime" />
+              </span>
+              <span className="text-sm font-semibold text-ink-soft tracking-tight">
+                Trusted by <span className="text-ink">{stats.totalUsers > 0 ? `${stats.totalUsers.toLocaleString()}+` : 'thousands of'}</span> people across Ghana
+              </span>
+            </div>
 
-            <h1 className="mt-5 text-[2.6rem] leading-[1.04] sm:text-6xl lg:text-7xl font-extrabold text-ink">
-              <Typewriter text={'Buy & sell tech\nwithout the noise.'} />
+            <h1 className="mt-6 text-[2.6rem] leading-[1.04] sm:text-6xl lg:text-7xl font-extrabold text-ink">
+              <RotatingHeadline />
             </h1>
 
             <p className="mt-5 text-ink-muted text-base sm:text-lg max-w-lg leading-relaxed">
