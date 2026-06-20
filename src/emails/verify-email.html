@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirm your email · TechMart</title>
+</head>
+<body style="margin:0;padding:0;background-color:#ebede7;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#ebede7;padding:40px 20px;">
+    <tr><td align="center">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;background-color:#ffffff;border-radius:24px;border:1px solid rgba(17,20,24,0.07);overflow:hidden;">
+
+        <tr><td style="padding:32px 40px 8px;">
+          <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+            <td style="vertical-align:middle;"><img src="https://your-domain.com/images/logo.png" alt="TechMart" width="36" height="36" style="display:block;border-radius:999px;background:#16243f;"></td>
+            <td style="vertical-align:middle;padding-left:10px;font-size:18px;font-weight:800;color:#15181d;letter-spacing:-0.5px;">TechMart</td>
+          </tr></table>
+        </td></tr>
+
+        <tr><td style="padding:24px 40px 8px;">
+          <h1 style="margin:0 0 12px;font-size:24px;font-weight:800;color:#15181d;letter-spacing:-0.5px;">Just one quick step</h1>
+          <p style="margin:0 0 16px;font-size:15px;line-height:1.65;color:#6b7280;">
+            Hi {{user_name}}, please confirm this is your email address so we can finish setting up your TechMart account and keep it secure.
+          </p>
+        </td></tr>
+
+        <tr><td style="padding:12px 40px 8px;" align="center">
+          <a href="{{verification_url}}" style="display:inline-block;padding:14px 34px;background:#16243f;color:#ffffff;font-size:15px;font-weight:600;text-decoration:none;border-radius:999px;">Confirm my email</a>
+        </td></tr>
+
+        <tr><td style="padding:20px 40px 8px;">
+          <p style="margin:0;font-size:13px;line-height:1.6;color:#9aa1ad;">
+            Button not working? Copy and paste this link into your browser:<br>
+            <a href="{{verification_url}}" style="color:#16243f;word-break:break-all;">{{verification_url}}</a>
+          </p>
+        </td></tr>
+
+        <tr><td style="padding:24px 40px 32px;border-top:1px solid rgba(17,20,24,0.07);text-align:center;">
+          <p style="margin:0;font-size:12px;color:#9aa1ad;line-height:1.6;">
+            Didn't sign up? You can safely ignore this email.<br>
+            © 2026 TechMart · Accra, Ghana
+          </p>
+        </td></tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>

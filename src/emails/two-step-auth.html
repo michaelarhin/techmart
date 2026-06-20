@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Two-step verification · TechMart</title>
+</head>
+<body style="margin:0;padding:0;background-color:#ebede7;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#ebede7;padding:40px 20px;">
+    <tr><td align="center">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;background-color:#ffffff;border-radius:24px;border:1px solid rgba(17,20,24,0.07);overflow:hidden;">
+
+        <tr><td style="padding:32px 40px 8px;">
+          <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+            <td style="vertical-align:middle;"><img src="https://your-domain.com/images/logo.png" alt="TechMart" width="36" height="36" style="display:block;border-radius:999px;background:#16243f;"></td>
+            <td style="vertical-align:middle;padding-left:10px;font-size:18px;font-weight:800;color:#15181d;letter-spacing:-0.5px;">TechMart</td>
+          </tr></table>
+        </td></tr>
+
+        <tr><td style="padding:24px 40px 8px;">
+          <h1 style="margin:0 0 8px;font-size:24px;font-weight:800;color:#15181d;letter-spacing:-0.5px;">Confirm it's you</h1>
+          <p style="margin:0 0 20px;font-size:15px;line-height:1.65;color:#6b7280;">
+            Hi {{user_name}}, we noticed a sign-in to your account. Enter this code to continue.
+          </p>
+        </td></tr>
+
+        <tr><td style="padding:0 40px 8px;" align="center">
+          <div style="display:inline-block;padding:18px 36px;background-color:#f4f5f1;border:1px solid rgba(17,20,24,0.07);border-radius:16px;">
+            <span style="font-size:34px;font-weight:800;letter-spacing:12px;color:#15181d;font-family:'Courier New',monospace;">{{otp_code}}</span>
+          </div>
+        </td></tr>
+
+        <tr><td style="padding:16px 40px 8px;" align="center">
+          <p style="margin:0;font-size:14px;color:#6b7280;">This code expires in <strong style="color:#15181d;">5 minutes</strong>.</p>
+        </td></tr>
+
+        <tr><td style="padding:18px 40px 8px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f5f1;border-radius:14px;">
+            <tr><td style="padding:16px 20px;">
+              <p style="margin:0 0 10px;font-size:11px;font-weight:700;color:#9aa1ad;text-transform:uppercase;letter-spacing:0.6px;">Sign-in details</p>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                <tr><td style="padding:5px 0;font-size:13px;color:#6b7280;">Device</td><td style="padding:5px 0;font-size:13px;color:#3c4350;text-align:right;">{{device}}</td></tr>
+                <tr><td style="padding:5px 0;font-size:13px;color:#6b7280;">Location</td><td style="padding:5px 0;font-size:13px;color:#3c4350;text-align:right;">{{location}}</td></tr>
+                <tr><td style="padding:5px 0;font-size:13px;color:#6b7280;">IP address</td><td style="padding:5px 0;font-size:13px;color:#3c4350;text-align:right;">{{ip_address}}</td></tr>
+                <tr><td style="padding:5px 0;font-size:13px;color:#6b7280;">Time</td><td style="padding:5px 0;font-size:13px;color:#3c4350;text-align:right;">{{timestamp}}</td></tr>
+              </table>
+            </td></tr>
+          </table>
+        </td></tr>
+
+        <tr><td style="padding:14px 40px 8px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:12px;">
+            <tr><td style="padding:14px 16px;">
+              <p style="margin:0;font-size:13px;color:#dc2626;line-height:1.55;">
+                <strong>Not you?</strong> Someone may have your password.
+                <a href="{{reset_password_url}}" style="color:#dc2626;text-decoration:underline;">Reset it now</a>.
+              </p>
+            </td></tr>
+          </table>
+        </td></tr>
+
+        <tr><td style="padding:24px 40px 32px;border-top:1px solid rgba(17,20,24,0.07);text-align:center;margin-top:16px;">
+          <p style="margin:0;font-size:12px;color:#9aa1ad;line-height:1.6;">
+            This is an automated security message — please don't reply.<br>
+            © 2026 TechMart · Accra, Ghana
+          </p>
+        </td></tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>
