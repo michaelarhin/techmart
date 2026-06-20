@@ -57,7 +57,9 @@ const Layout = () => {
               : '0 1px 2px rgba(17,20,24,0.03), 0 10px 30px -24px rgba(17,20,24,0.18)',
           }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-7xl mx-auto rounded-full border border-line bg-surface/85 backdrop-blur-xl"
+          className={`max-w-7xl mx-auto border border-line bg-surface/85 backdrop-blur-xl ${
+            isMobileMenuOpen ? 'rounded-3xl' : 'rounded-full'
+          }`}
         >
           <div className="flex items-center justify-between gap-3 h-14 md:h-16 pl-3 pr-2 md:pl-5 md:pr-3">
             <Link to="/" className="flex items-center gap-2.5 group shrink-0">
@@ -148,9 +150,9 @@ const Layout = () => {
                 animate={{ height: 'auto', opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                className="md:hidden overflow-hidden"
+                className="md:hidden overflow-hidden border-t border-line"
               >
-                <div className="px-3 pb-3 pt-1 flex flex-col gap-1">
+                <div className="px-3 pb-4 pt-2 flex flex-col gap-1 bg-surface rounded-b-3xl">
                   {filteredLinks.map((link) => {
                     const active = location.pathname === link.path;
                     return (
