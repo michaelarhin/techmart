@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './hooks/useAuth';
 import { ToastProvider } from './components/Toast';
 import ScrollToTop from './components/ScrollToTop';
+import OnboardingTour from './components/OnboardingTour';
 import Layout from './components/Layout';
 
 // Route-level code splitting keeps the initial bundle small.
@@ -34,6 +35,7 @@ function App() {
       <ToastProvider>
         <BrowserRouter>
           <ScrollToTop />
+          <OnboardingTour />
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<Layout />}>

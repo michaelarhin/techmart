@@ -10,7 +10,6 @@ import {
   Star,
   Eye,
   Heart,
-  Share2,
   Flag,
   ShieldCheck,
   Clock,
@@ -27,13 +26,14 @@ import {
   Users,
   Bell,
 } from 'lucide-react';
-import { getListing, getReviews, createReview, toggleFavorite, sendMessage, renewListing, setListingSold, deleteListing, recordListingView, getListingViewers, isFollowingSeller, followSeller, unfollowSeller } from '../lib/supabase';
+import { getListing, getReviews, createReview, toggleFavorite, sendMessage, renewListing, setListingSold, deleteListing, recordListingView, getListingViewers, isFollowingSeller, followSeller, unfollowSeller, recordRecentView, reportListing } from '../lib/supabase';
 import { useAuth } from '../hooks/useAuth';
 import { useCurrency } from '../hooks/useCurrency';
 import { useToast } from '../components/Toast';
 import { EASE } from '../lib/motion';
 import ContactBar from '../components/ContactBar';
 import ReviewCard from '../components/ReviewCard';
+import ShareSheet from '../components/ShareSheet';
 import type { Listing, Review } from '../types';
 
 const ListingDetail = () => {
@@ -57,6 +57,9 @@ const ListingDetail = () => {
   const [showViewers, setShowViewers] = useState(false);
   const [following, setFollowing] = useState(false);
   const [togglingFollow, setTogglingFollow] = useState(false);
+  const [showReport, setShowReport] = useState(false);
+  const [reportReason, setReportReason] = useState('');
+  const [reporting, setReporting] = useState(false);
 
   const [message, setMessage] = useState('');
   const [sending, setSending] = useState(false);
@@ -80,12 +83,13 @@ const ListingDetail = () => {
     fetchListing();
   }, [id]);
 
-  // Record that the current user viewed this listing (fire-and-forget, once).
+  // Record view + recently viewed (fire-and-forget).
   useEffect(() => {
     if (!user || !listing) return;
-    if (user.id === listing.user_id) return;
-    recordListingView(listing.id, user.id);
-    // Check if user follows this seller.
+    if (user.id !== listing.user_id) {
+      recordListingView(listing.id, user.id);
+    }
+    recordRecentView(user.id, listing.id);
     isFollowingSeller(user.id, listing.user_id).then(setFollowing);
   }, [user, listing?.id]);
 
@@ -418,12 +422,11 @@ const ListingDetail = () => {
               >
                 <Heart className={`w-5 h-5 ${isFavorite ? 'fill-current' : ''}`} />
               </button>
-              <button
-                onClick={() => { navigator.clipboard.writeText(window.location.href); toast('Link copied'); }}
-                className="w-14 grid place-items-center rounded-2xl border border-line bg-surface text-ink-muted hover:text-ink hover:shadow-pill transition-all"
-              >
-                <Share2 className="w-5 h-5" />
-              </button>
+              <ShareSheet
+                url={window.location.href}
+                title={listing.title}
+                text={`Check out "${listing.title}" on TechMart — ${formatPrice(listing.price)}`}
+              />
             </div>
 
             {isOwner && daysLeft !== null && (
@@ -596,7 +599,10 @@ const ListingDetail = () => {
             />
 
             {!isOwner && (
-              <button className="flex items-center gap-2 text-ink-faint hover:text-red-500 text-sm transition-colors">
+              <button
+                onClick={() => setShowReport(true)}
+                className="flex items-center gap-2 text-ink-faint hover:text-red-500 text-sm transition-colors"
+              >
                 <Flag className="w-4 h-4" />
                 Report this listing
               </button>
@@ -757,6 +763,63 @@ const ListingDetail = () => {
                   </button>
                 </div>
               </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Report modal */}
+      <AnimatePresence>
+        {showReport && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+            onClick={() => setShowReport(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 12 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 12 }}
+              transition={{ duration: 0.3, ease: EASE }}
+              className="w-full max-w-md bg-surface rounded-4xl p-6 shadow-lift"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h3 className="text-xl font-extrabold text-ink mb-2">Report this listing</h3>
+              <p className="text-sm text-ink-muted mb-4">Help us keep TechMart safe. What's wrong?</p>
+              <div className="flex flex-col gap-2 mb-4">
+                {['Scam or fraud', 'Fake/misleading photos', 'Stolen item', 'Inappropriate content', 'Other'].map((r) => (
+                  <button
+                    key={r}
+                    type="button"
+                    onClick={() => setReportReason(r)}
+                    className={`text-left px-4 py-3 rounded-2xl border text-sm font-medium transition-all ${
+                      reportReason === r ? 'border-red-300 bg-red-50 text-red-600' : 'border-line bg-surface text-ink-soft hover:bg-canvas'
+                    }`}
+                  >
+                    {r}
+                  </button>
+                ))}
+              </div>
+              <div className="flex gap-3">
+                <button onClick={() => setShowReport(false)} className="flex-1 py-3 rounded-2xl border border-line bg-surface text-ink-soft hover:bg-canvas font-semibold transition-colors">Cancel</button>
+                <button
+                  disabled={!reportReason || reporting}
+                  onClick={async () => {
+                    if (!user || !listing) return;
+                    setReporting(true);
+                    await reportListing({ reporter_id: user.id, listing_id: listing.id, seller_id: listing.user_id, reason: reportReason });
+                    setReporting(false);
+                    setShowReport(false);
+                    setReportReason('');
+                    toast('Report submitted — thanks for helping keep TechMart safe');
+                  }}
+                  className="flex-1 py-3 rounded-2xl bg-red-500 text-white font-semibold transition-colors disabled:opacity-50 hover:bg-red-600"
+                >
+                  {reporting ? 'Submitting…' : 'Submit report'}
+                </button>
+              </div>
             </motion.div>
           </motion.div>
         )}

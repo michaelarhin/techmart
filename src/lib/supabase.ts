@@ -443,6 +443,119 @@ export const getFollowerEmails = async (sellerId: string) => {
   return (data || []).map((r: any) => r.profiles).filter((p: any) => p?.email);
 };
 
+// --- Notifications ---
+
+export const getNotifications = async (userId: string) => {
+  const { data, error } = await supabase
+    .from('notifications')
+    .select('*')
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false })
+    .limit(50);
+  return { data: data || [], error };
+};
+
+export const getUnreadCount = async (userId: string) => {
+  const { count } = await supabase
+    .from('notifications')
+    .select('id', { count: 'exact', head: true })
+    .eq('user_id', userId)
+    .eq('is_read', false);
+  return count || 0;
+};
+
+export const markNotificationsRead = async (userId: string) => {
+  await supabase
+    .from('notifications')
+    .update({ is_read: true })
+    .eq('user_id', userId)
+    .eq('is_read', false);
+};
+
+export const createNotification = async (data: {
+  user_id: string;
+  type: string;
+  title: string;
+  body?: string;
+  link?: string;
+}) => {
+  await supabase.from('notifications').insert(data);
+};
+
+// --- Reports ---
+
+export const reportListing = async (data: {
+  reporter_id: string;
+  listing_id?: string;
+  seller_id?: string;
+  reason: string;
+  details?: string;
+}) => {
+  const { error } = await supabase.from('reports').insert(data);
+  return { error };
+};
+
+export const getPendingReports = async () => {
+  const { data, error } = await supabase
+    .from('reports')
+    .select('*, profiles:reporter_id(full_name), listings:listing_id(title, images)')
+    .eq('status', 'pending')
+    .order('created_at', { ascending: true });
+  return { data: data || [], error };
+};
+
+export const updateReport = async (id: string, status: string) => {
+  await supabase.from('reports').update({ status }).eq('id', id);
+};
+
+// --- Saved Searches ---
+
+export const getSavedSearches = async (userId: string) => {
+  const { data, error } = await supabase
+    .from('saved_searches')
+    .select('*')
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false });
+  return { data: data || [], error };
+};
+
+export const saveSearch = async (data: {
+  user_id: string;
+  name: string;
+  query?: string;
+  category?: string;
+  min_price?: number;
+  max_price?: number;
+  condition?: string;
+  location?: string;
+}) => {
+  const { error } = await supabase.from('saved_searches').insert(data);
+  return { error };
+};
+
+export const deleteSavedSearch = async (id: string) => {
+  await supabase.from('saved_searches').delete().eq('id', id);
+};
+
+// --- Recently Viewed ---
+
+export const recordRecentView = async (userId: string, listingId: string) => {
+  await supabase.from('recently_viewed').upsert(
+    { user_id: userId, listing_id: listingId, viewed_at: new Date().toISOString() },
+    { onConflict: 'user_id,listing_id' }
+  );
+};
+
+export const getRecentlyViewed = async (userId: string) => {
+  const { data, error } = await supabase
+    .from('recently_viewed')
+    .select('listing_id, viewed_at, listings:listing_id(*, profiles(*), categories(*))')
+    .eq('user_id', userId)
+    .order('viewed_at', { ascending: false })
+    .limit(12);
+  return { data: data || [], error };
+};
+
 // --- Platform Stats ---
 
 export const getPlatformStats = async () => {

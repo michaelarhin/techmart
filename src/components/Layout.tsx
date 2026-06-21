@@ -3,6 +3,7 @@ import { Outlet, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../hooks/useAuth';
 import CurrencySelector from './CurrencySelector';
+import NotificationBell from './NotificationBell';
 import { springSnappy } from '../lib/motion';
 import {
   Search,
@@ -100,6 +101,7 @@ const Layout = () => {
             {/* Right side */}
             <div className="hidden md:flex items-center gap-2 shrink-0">
               <CurrencySelector />
+              <NotificationBell />
               {user ? (
                 <>
                   <Link
