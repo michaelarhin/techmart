@@ -35,7 +35,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ listing, compact = false }) =
       className="will-transform h-full"
     >
       <Link to={`/listing/${listing.id}`} className="group block h-full">
-        <div className="surface rounded-3xl p-2.5 h-full flex flex-col transition-shadow duration-300 group-hover:shadow-lift">
+        <div className="surface rounded-xl p-2.5 h-full flex flex-col transition-shadow duration-300 group-hover:shadow-lift">
           {/* Image */}
           <div className="relative overflow-hidden rounded-[1.25rem] bg-canvas aspect-[4/3]">
             {listing.images?.[0] ? (
@@ -89,7 +89,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ listing, compact = false }) =
               {listing.title}
             </h3>
 
-            <p className="mt-1.5 text-lg font-extrabold tracking-tight text-ink">
+            <p className="mt-1.5 text-lg font-bold tracking-tight text-ink">
               {formatPrice(listing.price)}
               {listing.is_negotiable && (
                 <span className="ml-2 align-middle text-[11px] font-semibold text-ink-muted">

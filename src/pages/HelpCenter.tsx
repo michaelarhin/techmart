@@ -100,12 +100,12 @@ const HelpCenter = () => {
     <div className="pt-24 md:pt-28 pb-10">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div variants={fadeUp} initial="hidden" animate="show" className="surface rounded-4xl p-7 sm:p-10 relative overflow-hidden">
+        <motion.div variants={fadeUp} initial="hidden" animate="show" className="surface rounded-2xl p-7 sm:p-10 relative overflow-hidden">
           <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full surface-muted text-xs font-semibold text-accent w-fit">
             <LifeBuoy className="w-4 h-4" />
             Help center
           </span>
-          <h1 className="mt-5 text-3xl sm:text-5xl font-extrabold text-ink leading-tight">
+          <h1 className="mt-5 text-3xl sm:text-5xl font-bold text-ink leading-tight">
             How can we help?
           </h1>
           <p className="mt-4 text-ink-muted text-base sm:text-lg max-w-xl leading-relaxed">
@@ -137,7 +137,7 @@ const HelpCenter = () => {
           className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-10"
         >
           {topics.map((t) => (
-            <motion.div key={t.title} variants={item} className="surface rounded-3xl p-5">
+            <motion.div key={t.title} variants={item} className="surface rounded-xl p-5">
               <span className="w-11 h-11 rounded-2xl surface-muted grid place-items-center text-navy-600 mb-3">
                 <t.icon className="w-5 h-5" />
               </span>
@@ -151,7 +151,7 @@ const HelpCenter = () => {
         <div className="mt-12">
           <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={viewportOnce} className="mb-5">
             <span className="text-xs font-bold uppercase tracking-[0.18em] text-accent">FAQ</span>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-ink mt-1">Frequently asked</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-ink mt-1">Frequently asked</h2>
           </motion.div>
 
           <motion.div
@@ -180,10 +180,10 @@ const HelpCenter = () => {
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
-          className="relative overflow-hidden rounded-5xl bg-navy-600 text-white p-8 sm:p-12 mt-12"
+          className="relative overflow-hidden rounded-2xl bg-navy-600 text-white p-8 sm:p-12 mt-12"
         >
           <div className="relative z-10">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">Still need a hand?</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white">Still need a hand?</h2>
             <p className="text-white/70 mt-2 text-lg max-w-lg">
               Message or call our support line — we reply fastest on WhatsApp.
             </p>

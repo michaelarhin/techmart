@@ -73,7 +73,7 @@ const Profile = () => {
         <span className="w-16 h-16 rounded-2xl surface grid place-items-center text-ink-faint mb-5">
           <User className="w-7 h-7" />
         </span>
-        <h1 className="text-2xl font-extrabold text-ink mb-2">{user ? 'Profile not found' : 'Sign in required'}</h1>
+        <h1 className="text-2xl font-bold text-ink mb-2">{user ? 'Profile not found' : 'Sign in required'}</h1>
         <p className="text-ink-muted mb-6">{user ? "This user doesn't exist or has been removed." : 'Please sign in to view your profile.'}</p>
         {!user && (
           <button onClick={() => navigate('/auth')} className="btn-navy px-6 py-3 rounded-full transition-colors">
@@ -94,14 +94,14 @@ const Profile = () => {
     <div className="pt-24 md:pt-28 pb-10">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header card */}
-        <motion.div variants={fadeUp} initial="hidden" animate="show" className="surface rounded-4xl p-6 md:p-8">
+        <motion.div variants={fadeUp} initial="hidden" animate="show" className="surface rounded-2xl p-6 md:p-8">
           <div className="flex flex-col md:flex-row md:items-center gap-6">
             <div className="relative">
-              <div className="w-24 h-24 md:w-28 md:h-28 rounded-3xl bg-navy-600 grid place-items-center overflow-hidden">
+              <div className="w-24 h-24 md:w-28 md:h-28 rounded-xl bg-navy-600 grid place-items-center overflow-hidden">
                 {profile.avatar_url ? (
                   <img src={profile.avatar_url} alt={profile.full_name || 'User'} className="w-full h-full object-cover" />
                 ) : (
-                  <span className="text-3xl md:text-4xl font-extrabold text-white">{profile.full_name?.charAt(0) || 'U'}</span>
+                  <span className="text-3xl md:text-4xl font-bold text-white">{profile.full_name?.charAt(0) || 'U'}</span>
                 )}
               </div>
               {isOwnProfile && (
@@ -114,7 +114,7 @@ const Profile = () => {
             <div className="flex-1">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <h1 className="text-2xl md:text-3xl font-extrabold text-ink">{profile.full_name || 'Anonymous seller'}</h1>
+                  <h1 className="text-2xl md:text-3xl font-bold text-ink">{profile.full_name || 'Anonymous seller'}</h1>
                   <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 mt-2 text-sm text-ink-muted">
                     {profile.location && <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4" />{profile.location}</span>}
                     <span className="flex items-center gap-1.5">
@@ -136,14 +136,14 @@ const Profile = () => {
                 <div className="flex items-center gap-3 surface-muted rounded-2xl px-4 py-3">
                   <Star className="w-5 h-5 text-amber-400 fill-amber-400" />
                   <div>
-                    <div className="text-lg font-extrabold text-ink leading-none">{profile.rating ? profile.rating.toFixed(1) : '—'}</div>
+                    <div className="text-lg font-bold text-ink leading-none">{profile.rating ? profile.rating.toFixed(1) : '—'}</div>
                     <div className="text-xs text-ink-muted mt-0.5">{profile.review_count} reviews</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 surface-muted rounded-2xl px-4 py-3">
                   <Package className="w-5 h-5 text-navy-600" />
                   <div>
-                    <div className="text-lg font-extrabold text-ink leading-none">{profile.listings_count}</div>
+                    <div className="text-lg font-bold text-ink leading-none">{profile.listings_count}</div>
                     <div className="text-xs text-ink-muted mt-0.5">Listings</div>
                   </div>
                 </div>
@@ -181,7 +181,7 @@ const Profile = () => {
         <motion.div key={activeTab} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="mt-7">
           {activeTab === 'listings' && (
             listings.length === 0 ? (
-              <div className="surface rounded-4xl text-center py-16">
+              <div className="surface rounded-2xl text-center py-16">
                 <span className="w-14 h-14 mx-auto rounded-2xl surface-muted grid place-items-center text-ink-faint mb-4"><Package className="w-7 h-7" /></span>
                 <h3 className="text-lg font-bold text-ink mb-1">No listings yet</h3>
                 {isOwnProfile ? (
@@ -207,7 +207,7 @@ const Profile = () => {
 
           {activeTab === 'reviews' && (
             reviews.length === 0 ? (
-              <div className="surface rounded-4xl text-center py-16">
+              <div className="surface rounded-2xl text-center py-16">
                 <span className="w-14 h-14 mx-auto rounded-2xl surface-muted grid place-items-center text-ink-faint mb-4"><Star className="w-7 h-7" /></span>
                 <h3 className="text-lg font-bold text-ink mb-1">No reviews yet</h3>
                 <p className="text-ink-muted">{isOwnProfile ? 'Reviews from buyers will appear here.' : "This seller hasn't received any reviews yet."}</p>
@@ -223,7 +223,7 @@ const Profile = () => {
 
           {activeTab === 'favorites' && isOwnProfile && (
             favorites.length === 0 ? (
-              <div className="surface rounded-4xl text-center py-16">
+              <div className="surface rounded-2xl text-center py-16">
                 <span className="w-14 h-14 mx-auto rounded-2xl surface-muted grid place-items-center text-ink-faint mb-4"><Heart className="w-7 h-7" /></span>
                 <h3 className="text-lg font-bold text-ink mb-1">No favorites yet</h3>
                 <p className="text-ink-muted mb-6">Save listings you like to find them again here.</p>

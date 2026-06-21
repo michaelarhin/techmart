@@ -58,12 +58,12 @@ const SafetyTips = () => (
   <div className="pt-24 md:pt-28 pb-10">
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Header */}
-      <motion.div variants={fadeUp} initial="hidden" animate="show" className="surface rounded-4xl p-7 sm:p-10">
+      <motion.div variants={fadeUp} initial="hidden" animate="show" className="surface rounded-2xl p-7 sm:p-10">
         <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full surface-muted text-xs font-semibold text-accent w-fit">
           <ShieldCheck className="w-4 h-4" />
           Safety tips
         </span>
-        <h1 className="mt-5 text-3xl sm:text-5xl font-extrabold text-ink leading-tight">
+        <h1 className="mt-5 text-3xl sm:text-5xl font-bold text-ink leading-tight">
           Trade smart, stay safe
         </h1>
         <p className="mt-4 text-ink-muted text-base sm:text-lg max-w-2xl leading-relaxed">
@@ -81,7 +81,7 @@ const SafetyTips = () => (
         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10"
       >
         {tips.map((t) => (
-          <motion.div key={t.title} variants={item} className="surface rounded-3xl p-6">
+          <motion.div key={t.title} variants={item} className="surface rounded-xl p-6">
             <span className="w-12 h-12 rounded-2xl surface-muted grid place-items-center text-navy-600 mb-4">
               <t.icon className="w-6 h-6" />
             </span>
@@ -97,13 +97,13 @@ const SafetyTips = () => (
         initial="hidden"
         whileInView="show"
         viewport={viewportOnce}
-        className="rounded-4xl p-7 sm:p-9 mt-10 bg-amber-500/10 border border-amber-500/30"
+        className="rounded-2xl p-7 sm:p-9 mt-10 bg-amber-500/10 border border-amber-500/30"
       >
         <div className="flex items-center gap-3 mb-4">
           <span className="w-11 h-11 rounded-2xl bg-amber-500/20 text-amber-600 grid place-items-center">
             <AlertTriangle className="w-5 h-5" />
           </span>
-          <h2 className="text-xl sm:text-2xl font-extrabold text-ink">Watch for these red flags</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-ink">Watch for these red flags</h2>
         </div>
         <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-3">
           {redFlags.map((flag) => (
@@ -124,10 +124,10 @@ const SafetyTips = () => (
         initial="hidden"
         whileInView="show"
         viewport={viewportOnce}
-        className="relative overflow-hidden rounded-5xl bg-navy-600 text-white p-8 sm:p-12 mt-10"
+        className="relative overflow-hidden rounded-2xl bg-navy-600 text-white p-8 sm:p-12 mt-10"
       >
         <div className="relative z-10 max-w-xl">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-white">Spotted something off?</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white">Spotted something off?</h2>
           <p className="text-white/70 mt-2 text-lg">
             Tell us. Reporting a dodgy listing or member helps protect the whole community — and we
             act on every report.

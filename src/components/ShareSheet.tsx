@@ -63,7 +63,7 @@ const ShareSheet = ({ url, title, text }: ShareSheetProps) => {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 60, opacity: 0 }}
               transition={{ duration: 0.3, ease: EASE }}
-              className="w-full max-w-sm bg-surface rounded-3xl p-6 shadow-lift"
+              className="w-full max-w-sm bg-surface rounded-xl p-6 shadow-lift"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between mb-5">

@@ -113,17 +113,17 @@ const Auth = () => {
           <span className="flex items-center justify-center w-10 h-10 rounded-full bg-navy-600 overflow-hidden">
             <img src="/images/logo.png" alt="TechMart" className="w-6 h-6 object-contain" />
           </span>
-          <span className="text-xl font-extrabold tracking-tight text-ink">TechMart</span>
+          <span className="text-xl font-bold tracking-tight text-ink">TechMart</span>
         </div>
 
-        <div className="surface rounded-4xl p-8">
+        <div className="surface rounded-2xl p-8">
           {mfaRequired ? (
             <div>
               <div className="text-center mb-6">
                 <span className="w-14 h-14 mx-auto rounded-2xl surface-muted grid place-items-center text-navy-600 mb-3">
                   <ShieldCheck className="w-7 h-7" />
                 </span>
-                <h1 className="text-2xl font-extrabold text-ink mb-1.5">Two-step verification</h1>
+                <h1 className="text-2xl font-bold text-ink mb-1.5">Two-step verification</h1>
                 <p className="text-ink-muted">Enter the 6-digit code from your authenticator app.</p>
               </div>
               {error && (
@@ -148,7 +148,7 @@ const Auth = () => {
           ) : (
             <>
               <div className="text-center mb-6">
-                <h1 className="text-2xl font-extrabold text-ink mb-1.5">
+                <h1 className="text-2xl font-bold text-ink mb-1.5">
                   {isSignUp ? 'Create your account' : 'Welcome back'}
                 </h1>
                 <p className="text-ink-muted">

@@ -214,7 +214,7 @@ const CreateListing = () => {
         <span className="w-16 h-16 rounded-2xl surface grid place-items-center text-ink-faint mb-5">
           <Package className="w-7 h-7" />
         </span>
-        <h1 className="text-2xl font-extrabold text-ink mb-2">Sign in required</h1>
+        <h1 className="text-2xl font-bold text-ink mb-2">Sign in required</h1>
         <p className="text-ink-muted mb-6">You need to be signed in to create a listing.</p>
         <button type="button" onClick={() => navigate('/auth')} className="btn-navy px-6 py-3 rounded-full transition-colors">
           Sign in
@@ -236,7 +236,7 @@ const CreateListing = () => {
     <div className="pt-24 md:pt-28 pb-16">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }}>
-          <h1 className="text-3xl md:text-4xl font-extrabold text-ink">{isEdit ? 'Edit listing' : 'Create a listing'}</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-ink">{isEdit ? 'Edit listing' : 'Create a listing'}</h1>
           <p className="text-ink-muted mt-1 text-lg">{isEdit ? 'Update your details and save changes.' : 'List your item and reach thousands of buyers.'}</p>
         </motion.div>
 
@@ -272,7 +272,7 @@ const CreateListing = () => {
             {/* Step 1 */}
             {currentStep === 1 && (
               <motion.div key="step1" {...stepMotion} className="space-y-4">
-                <div className="surface rounded-3xl p-6">
+                <div className="surface rounded-xl p-6">
                   <label className="block text-sm font-bold text-ink mb-2">Title</label>
                   <input
                     type="text"
@@ -284,7 +284,7 @@ const CreateListing = () => {
                   />
                   <p className="text-xs text-ink-faint mt-1.5">{title.length}/100 — be specific and include key specs.</p>
                 </div>
-                <div className="surface rounded-3xl p-6">
+                <div className="surface rounded-xl p-6">
                   <label className="block text-sm font-bold text-ink mb-2">Description</label>
                   <textarea
                     value={description}
@@ -301,7 +301,7 @@ const CreateListing = () => {
             {/* Step 2 */}
             {currentStep === 2 && (
               <motion.div key="step2" {...stepMotion} className="space-y-4">
-                <div className="surface rounded-3xl p-6">
+                <div className="surface rounded-xl p-6">
                   <label className="block text-sm font-bold text-ink mb-3">Category</label>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     {categories.map((cat) => (
@@ -320,7 +320,7 @@ const CreateListing = () => {
                   </div>
                 </div>
 
-                <div className="surface rounded-3xl p-6">
+                <div className="surface rounded-xl p-6">
                   <label className="block text-sm font-bold text-ink mb-3">Condition</label>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {conditions.map((cond) => (
@@ -339,7 +339,7 @@ const CreateListing = () => {
                   </div>
                 </div>
 
-                <div className="surface rounded-3xl p-6">
+                <div className="surface rounded-xl p-6">
                   <label className="block text-sm font-bold text-ink mb-2">Price range (GHS)</label>
                   <p className="text-xs text-ink-faint mb-4">Set a single price, or a range. Leave "Max" empty for a fixed price.</p>
                   <div className="flex items-end gap-3">
@@ -377,7 +377,7 @@ const CreateListing = () => {
                   </button>
                 </div>
 
-                <div className="surface rounded-3xl p-6">
+                <div className="surface rounded-xl p-6">
                   <div className="flex items-center justify-between mb-3">
                     <label className="text-sm font-bold text-ink">Specifications (optional)</label>
                     <Info className="w-4 h-4 text-ink-faint" />
@@ -408,7 +408,7 @@ const CreateListing = () => {
             {/* Step 3 */}
             {currentStep === 3 && (
               <motion.div key="step3" {...stepMotion} className="space-y-4">
-                <div className="surface rounded-3xl p-6">
+                <div className="surface rounded-xl p-6">
                   <label className="block text-sm font-bold text-ink mb-1">Photos ({images.length}/{MAX_IMAGES})</label>
                   <p className="text-ink-muted text-sm mb-4">Add up to {MAX_IMAGES} photos from your device. The first one is your cover image.</p>
 
@@ -474,7 +474,7 @@ const CreateListing = () => {
             {/* Step 4 */}
             {currentStep === 4 && (
               <motion.div key="step4" {...stepMotion} className="space-y-4">
-                <div className="surface rounded-3xl p-6">
+                <div className="surface rounded-xl p-6">
                   <label className="block text-sm font-bold text-ink mb-2">Location</label>
                   <div className="relative">
                     <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-ink-faint" />
@@ -482,7 +482,7 @@ const CreateListing = () => {
                   </div>
                 </div>
 
-                <div className="surface rounded-3xl p-6">
+                <div className="surface rounded-xl p-6">
                   <label className="block text-sm font-bold text-ink mb-2">Phone number (optional)</label>
                   <div className="relative">
                     <span className="absolute left-4 top-1/2 -translate-y-1/2 text-ink-muted font-medium">+233</span>
@@ -491,7 +491,7 @@ const CreateListing = () => {
                   <p className="text-xs text-ink-faint mt-2">Buyers can call you directly, or message you through the platform.</p>
                 </div>
 
-                <div className="rounded-3xl p-6 bg-navy-600 text-white">
+                <div className="rounded-xl p-6 bg-navy-600 text-white">
                   <h3 className="font-bold mb-4 text-white">Review your listing</h3>
                   <div className="space-y-3 text-sm">
                     <div className="flex gap-3"><div className="w-24 text-white/60">Title</div><div className="flex-1 font-medium">{title}</div></div>
@@ -500,7 +500,7 @@ const CreateListing = () => {
                     <div className="flex gap-3">
                       <div className="w-24 text-white/60">Price</div>
                       <div className="flex-1">
-                        <span className="text-2xl font-extrabold text-lime">
+                        <span className="text-2xl font-bold text-lime">
                           ₵{parseFloat(priceMin || '0').toLocaleString()}
                           {priceMax && parseFloat(priceMax) > parseFloat(priceMin) && <span> — ₵{parseFloat(priceMax).toLocaleString()}</span>}
                         </span>

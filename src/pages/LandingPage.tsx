@@ -10,14 +10,9 @@ import {
   ArrowUpRight,
   ArrowRight,
   ArrowLeft,
-  Star,
-  Users,
   Laptop,
   MemoryStick,
   Package,
-  ShieldCheck,
-  MessagesSquare,
-  Tag,
   Smartphone,
   Tablet,
   Camera,
@@ -30,7 +25,7 @@ import {
   CircuitBoard,
 } from 'lucide-react';
 import { getListings, getCategories, getPlatformStats } from '../lib/supabase';
-import { fadeUp, stagger, item, viewportOnce, EASE, springSnappy } from '../lib/motion';
+import { stagger, item, viewportOnce, EASE, springSnappy, fadeUp } from '../lib/motion';
 import ListingCard from '../components/ListingCard';
 import { HERO_SLIDES } from '../lib/heroImages';
 import type { Listing, Category } from '../types';
@@ -56,16 +51,6 @@ const categoryIcons: Record<string, React.ReactNode> = {
   'smart-home': <Home className="w-5 h-5" />,
   other: <Package className="w-5 h-5" />,
 };
-
-// Soft floating accent dot — quiet ambience, not neon.
-const Dot = ({ className, delay = 0 }: { className: string; delay?: number }) => (
-  <motion.span
-    aria-hidden
-    className={`absolute rounded-full ${className}`}
-    animate={{ y: [0, -12, 0] }}
-    transition={{ duration: 5 + delay, repeat: Infinity, ease: 'easeInOut', delay }}
-  />
-);
 
 /**
  * Hero slideshow — shows real user-uploaded listing images.
@@ -138,7 +123,7 @@ const HeroSlideshow = ({ listings }: { listings: Listing[] }) => {
             <span className="inline-block px-2.5 py-1 rounded-full btn-lime text-[11px] font-bold mb-2">
               {featured.length > 0 ? 'Live listing' : 'Featured'}
             </span>
-            <p className="text-white text-xl sm:text-2xl font-extrabold leading-tight drop-shadow line-clamp-2">
+            <p className="text-white text-xl sm:text-2xl font-bold leading-tight drop-shadow line-clamp-2">
               {slide.title}
             </p>
           </motion.div>
@@ -284,61 +269,35 @@ const LandingPage = () => {
           {/* Main hero card */}
           <motion.div
             variants={item}
-            className="lg:col-span-7 surface rounded-4xl p-7 sm:p-10 lg:p-12 relative overflow-hidden flex flex-col"
+            className="lg:col-span-7 surface rounded-2xl p-7 sm:p-10 lg:p-12 relative overflow-hidden flex flex-col"
           >
-            <div className="flex items-center gap-2.5 w-fit">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-lime" />
-              </span>
-              <span className="text-sm font-semibold text-ink-soft tracking-tight">
-                Trusted by <span className="text-ink">{stats.totalUsers > 0 ? `${stats.totalUsers.toLocaleString()}+` : 'thousands of'}</span> people across Ghana
-              </span>
-            </div>
+            <p className="text-sm text-ink-muted">
+              {stats.totalListings > 0 ? `${stats.totalListings.toLocaleString()} listings live right now` : 'Marketplace for tech in Ghana'}
+            </p>
 
-            <h1 className="mt-6 text-[2.6rem] leading-[1.04] sm:text-6xl lg:text-7xl font-extrabold text-ink">
+            <h1 className="mt-4 text-4xl sm:text-5xl lg:text-[3.5rem] font-bold leading-[1.1] text-ink">
               <RotatingHeadline />
             </h1>
 
-            <p className="mt-5 text-ink-muted text-base sm:text-lg max-w-lg leading-relaxed">
-              Phones, laptops, PCs, cameras, consoles and every gadget in between —
-              from real people. Browse, message sellers directly, and trade with confidence.
+            <p className="mt-4 text-ink-muted text-base sm:text-lg max-w-lg leading-relaxed">
+              Phones, laptops, PCs, cameras, consoles and more.
+              Browse listings from real people, message sellers, and trade locally.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link to="/marketplace" className="group inline-flex items-center gap-1.5 pl-5 pr-2 py-2 rounded-full btn-lime transition-colors duration-300">
-                <span className="text-sm">Browse marketplace</span>
-                <span className="w-8 h-8 rounded-full bg-navy-600 text-white grid place-items-center transition-transform duration-300 ease-spring group-hover:rotate-45">
-                  <ArrowUpRight className="w-4 h-4" />
-                </span>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <Link to="/marketplace" className="inline-flex items-center gap-2 px-5 py-3 rounded-xl btn-navy text-sm transition-colors">
+                Browse marketplace
+                <ArrowUpRight className="w-4 h-4" />
               </Link>
-              <Link to="/create" className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-line bg-surface text-ink font-semibold text-sm hover:shadow-pill transition-shadow duration-300">
-                Start selling
-                <Tag className="w-4 h-4 text-ink-muted" />
+              <Link to="/create" className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-line bg-surface text-ink font-medium text-sm hover:border-ink-faint transition-colors">
+                Sell something
               </Link>
             </div>
 
-            {/* Stats */}
-            <div className="mt-auto pt-10 grid grid-cols-3 gap-3 max-w-lg">
-              {[
-                { icon: Users, value: stats.totalUsers.toLocaleString(), label: 'Members' },
-                { icon: Package, value: stats.totalListings.toLocaleString(), label: 'Listings' },
-                { icon: Star, value: stats.avgRating > 0 ? stats.avgRating.toFixed(1) : '—', label: 'Avg rating' },
-              ].map((s) => (
-                <div key={s.label} className="surface-muted rounded-2xl px-3 py-3">
-                  <s.icon className="w-4 h-4 text-ink-muted" />
-                  <div className="mt-2 text-xl sm:text-2xl font-extrabold text-ink leading-none">{s.value}</div>
-                  <div className="text-xs text-ink-muted mt-1">{s.label}</div>
-                </div>
-              ))}
-            </div>
-
-            <Dot className="hidden sm:block w-3 h-3 bg-navy-600/20 top-10 right-16" delay={0.5} />
-            <Dot className="hidden sm:block w-2 h-2 bg-lime-dark/40 top-24 right-40" delay={1.2} />
           </motion.div>
 
           {/* Slideshow card */}
-          <motion.div variants={item} className="lg:col-span-5 surface rounded-4xl p-3">
+          <motion.div variants={item} className="lg:col-span-5 surface rounded-2xl p-3">
             <div className="relative w-full h-[300px] sm:h-[400px] lg:h-full lg:min-h-[540px]">
               <HeroSlideshow listings={listings} />
             </div>
@@ -356,8 +315,7 @@ const LandingPage = () => {
           className="flex items-end justify-between mb-6"
         >
           <div>
-            <span className="text-xs font-bold uppercase tracking-[0.18em] text-accent">Categories</span>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-ink mt-1">Shop by category</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-ink">Categories</h2>
             <p className="text-ink-muted mt-1">Find exactly the kind of gear you're after.</p>
           </div>
           <Link to="/marketplace" className="hidden sm:inline-flex items-center gap-1.5 text-sm font-semibold text-ink hover:text-navy-600 transition-colors">
@@ -377,7 +335,7 @@ const LandingPage = () => {
               <motion.div whileHover={{ y: -4 }} transition={springSnappy} className="will-transform">
                 <Link
                   to={`/marketplace?category=${category.slug}`}
-                  className="surface rounded-3xl p-5 flex flex-col gap-4 group hover:shadow-card transition-shadow duration-300"
+                  className="surface rounded-xl p-5 flex flex-col gap-4 group hover:shadow-card transition-shadow duration-300"
                 >
                   <span className="w-11 h-11 rounded-2xl surface-muted grid place-items-center text-navy-600 group-hover:bg-lime group-hover:text-[#15181d] transition-colors duration-300">
                     {categoryIcons[category.slug] || <Package className="w-5 h-5" />}
@@ -400,8 +358,7 @@ const LandingPage = () => {
           className="flex items-end justify-between mb-6"
         >
           <div>
-            <span className="text-xs font-bold uppercase tracking-[0.18em] text-accent">Just listed</span>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-ink mt-1">Fresh on the market</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-ink">Fresh listings</h2>
             <p className="text-ink-muted mt-1">Recently listed gear, ready to go.</p>
           </div>
           <div className="hidden sm:flex items-center gap-2">
@@ -417,7 +374,7 @@ const LandingPage = () => {
         {loading ? (
           <div className="flex gap-4 overflow-hidden">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="w-72 shrink-0 h-80 rounded-3xl surface-muted animate-pulse" />
+              <div key={i} className="w-72 shrink-0 h-80 rounded-xl surface-muted animate-pulse" />
             ))}
           </div>
         ) : (
@@ -432,7 +389,7 @@ const LandingPage = () => {
             ))}
             <Link
               to="/marketplace"
-              className="w-[78%] sm:w-72 shrink-0 snap-start surface rounded-3xl grid place-items-center text-center p-6 hover:shadow-card transition-shadow group"
+              className="w-[78%] sm:w-72 shrink-0 snap-start surface rounded-xl grid place-items-center text-center p-6 hover:shadow-card transition-shadow group"
             >
               <span>
                 <span className="w-12 h-12 mx-auto rounded-full icon-navy grid place-items-center mb-3 transition-transform duration-300 ease-spring group-hover:rotate-45">
@@ -446,71 +403,22 @@ const LandingPage = () => {
         )}
       </section>
 
-      {/* ===== How it works ===== */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 md:mt-24">
-        <motion.div
-          variants={stagger(0.08)}
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-          className="grid grid-cols-1 md:grid-cols-3 gap-4"
-        >
-          {[
-            { step: '01', title: 'Make an account', desc: 'Sign up in seconds and set up a profile sellers will trust.', icon: Users },
-            { step: '02', title: 'List your gear', desc: 'Add photos, set a price or a range, and publish in minutes.', icon: Tag },
-            { step: '03', title: 'Chat & close', desc: 'Message buyers, agree on details, and meet up safely.', icon: MessagesSquare },
-          ].map((s) => (
-            <motion.div key={s.step} variants={item} className="surface rounded-4xl p-7">
-              <div className="flex items-center justify-between">
-                <span className="w-12 h-12 rounded-2xl surface-muted grid place-items-center text-navy-600">
-                  <s.icon className="w-5 h-5" />
-                </span>
-                <span className="text-3xl font-extrabold text-ink-faint/40">{s.step}</span>
-              </div>
-              <h3 className="text-xl font-bold text-ink mt-5">{s.title}</h3>
-              <p className="text-ink-muted mt-2 leading-relaxed">{s.desc}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-      </section>
-
-      {/* ===== CTA banner ===== */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 md:mt-24">
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-          className="relative overflow-hidden rounded-5xl bg-navy-600 text-white p-8 sm:p-14"
-        >
-          <div className="relative z-10 max-w-xl">
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-xs font-semibold">
-              <ShieldCheck className="w-4 h-4 text-lime" />
-              Trusted by the community
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold mt-5 leading-tight text-white">
-              Ready to clear out or gear up?
-            </h2>
-            <p className="text-white/70 mt-3 text-lg">
-              Join thousands of people buying and selling tech the friendly way.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link to="/auth" className="group inline-flex items-center gap-1.5 pl-5 pr-2 py-2 rounded-full btn-lime transition-colors duration-300">
-                <span className="text-sm">Create free account</span>
-                <span className="w-8 h-8 rounded-full bg-navy-600 text-white grid place-items-center transition-transform duration-300 ease-spring group-hover:rotate-45">
-                  <ArrowUpRight className="w-4 h-4" />
-                </span>
-              </Link>
-              <Link to="/marketplace" className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold text-sm transition-colors">
-                Browse listings
-              </Link>
-            </div>
+      {/* ===== Simple CTA ===== */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 md:mt-24 mb-8">
+        <div className="surface rounded-2xl p-8 sm:p-12 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-ink">Got something to sell?</h2>
+          <p className="text-ink-muted mt-2 max-w-md mx-auto">
+            List it in under 2 minutes. Add photos, set your price, and reach buyers in your area.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3 justify-center">
+            <Link to="/create" className="inline-flex items-center gap-2 px-5 py-3 rounded-xl btn-navy text-sm transition-colors">
+              Post a listing
+            </Link>
+            <Link to="/help" className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-line bg-surface text-ink-muted font-medium text-sm hover:text-ink transition-colors">
+              How it works
+            </Link>
           </div>
-
-          <Dot className="w-24 h-24 bg-white/5 -top-6 right-10" delay={0.4} />
-          <Dot className="w-16 h-16 bg-lime/10 bottom-6 right-40" delay={1.1} />
-          <Dot className="w-32 h-32 bg-white/5 -bottom-12 right-[-20px]" delay={0.7} />
-        </motion.div>
+        </div>
       </section>
     </div>
   );

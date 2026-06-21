@@ -57,7 +57,7 @@ const Settings = () => {
         <span className="w-16 h-16 rounded-2xl surface grid place-items-center text-ink-faint mb-5">
           <User className="w-7 h-7" />
         </span>
-        <h1 className="text-2xl font-extrabold text-ink mb-2">Sign in required</h1>
+        <h1 className="text-2xl font-bold text-ink mb-2">Sign in required</h1>
         <p className="text-ink-muted mb-6">Please sign in to manage your settings.</p>
         <button onClick={() => navigate('/auth')} className="btn-navy px-6 py-3 rounded-full transition-colors">
           Sign in
@@ -133,13 +133,13 @@ const Settings = () => {
     <div className="pt-24 md:pt-28 pb-12">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div variants={fadeUp} initial="hidden" animate="show" className="mb-7">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-ink">Settings</h1>
+          <h1 className="text-3xl md:text-4xl font-bold text-ink">Settings</h1>
           <p className="text-ink-muted mt-1 text-lg">Manage your profile and security.</p>
         </motion.div>
 
         <motion.div variants={stagger(0.06)} initial="hidden" animate="show" className="flex flex-col gap-5">
           {/* Two-factor */}
-          <motion.section variants={item} className="surface rounded-3xl p-6 sm:p-7">
+          <motion.section variants={item} className="surface rounded-xl p-6 sm:p-7">
             <div className="flex items-center gap-3 mb-4">
               <span className={`w-11 h-11 rounded-2xl grid place-items-center ${totpFactorId ? 'bg-emerald-500/15 text-emerald-600' : 'surface-muted text-navy-600'}`}>
                 <Lock className="w-5 h-5" />
@@ -230,7 +230,7 @@ const Settings = () => {
           </motion.section>
 
           {/* Profile basics */}
-          <motion.section variants={item} className="surface rounded-3xl p-6 sm:p-7">
+          <motion.section variants={item} className="surface rounded-xl p-6 sm:p-7">
             <div className="flex items-center gap-3 mb-4">
               <span className="w-11 h-11 rounded-2xl surface-muted text-navy-600 grid place-items-center">
                 <User className="w-5 h-5" />
