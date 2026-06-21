@@ -193,13 +193,7 @@ export const getListings = async (filters: ListingFilters = {}) => {
   }
 
   const { data, error } = await query;
-  // Hide listings whose 30-day window has elapsed. Done client-side so the
-  // query keeps working even before the expiry migration is applied.
-  const now = Date.now();
-  const live = (data || []).filter(
-    (l: { expires_at?: string | null }) => !l.expires_at || new Date(l.expires_at).getTime() > now
-  );
-  return { data: live, error };
+  return { data: data || [], error };
 };
 
 /** Push a listing's expiry 30 days into the future and clear any reminder flag. */
