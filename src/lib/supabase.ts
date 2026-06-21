@@ -157,7 +157,7 @@ interface ListingFilters {
 export const getListings = async (filters: ListingFilters = {}) => {
   let query = supabase
     .from('listings')
-    .select('*, profiles(*), categories(*)')
+    .select('*, profiles!listings_user_id_fkey(*), categories(*)')
     .eq('is_sold', false)
     .order('created_at', { ascending: false });
 
@@ -166,7 +166,7 @@ export const getListings = async (filters: ListingFilters = {}) => {
     // Use an inner join approach by filtering on a joined table
     query = supabase
       .from('listings')
-      .select('*, profiles(*), categories!inner(*)')
+      .select('*, profiles!listings_user_id_fkey(*), categories!inner(*)')
       .eq('is_sold', false)
       .eq('categories.slug', filters.category)
       .order('created_at', { ascending: false });
@@ -228,7 +228,7 @@ export const deleteListing = async (id: string) => {
 export const getListing = async (id: string) => {
   const { data, error } = await supabase
     .from('listings')
-    .select('*, profiles(*), categories(*)')
+    .select('*, profiles!listings_user_id_fkey(*), categories(*)')
     .eq('id', id)
     .single();
 
@@ -357,7 +357,7 @@ export const createReview = async (reviewData: {
 export const getFavorites = async (userId: string) => {
   const { data, error } = await supabase
     .from('favorites')
-    .select('*, listings(*, profiles(*), categories(*))')
+    .select('*, listings(*, profiles!listings_user_id_fkey(*), categories(*))')
     .eq('user_id', userId)
     .order('created_at', { ascending: false });
   return { data: data || [], error };
@@ -543,7 +543,7 @@ export const recordRecentView = async (userId: string, listingId: string) => {
 export const getRecentlyViewed = async (userId: string) => {
   const { data, error } = await supabase
     .from('recently_viewed')
-    .select('listing_id, viewed_at, listings:listing_id(*, profiles(*), categories(*))')
+    .select('listing_id, viewed_at, listings:listing_id(*, profiles!listings_user_id_fkey(*), categories(*))')
     .eq('user_id', userId)
     .order('viewed_at', { ascending: false })
     .limit(12);
