@@ -141,7 +141,7 @@ const Messages = () => {
         <span className="w-16 h-16 rounded-2xl surface grid place-items-center text-ink-faint mb-5">
           <MessageCircle className="w-7 h-7" />
         </span>
-        <h1 className="text-2xl font-bold text-ink mb-2">Sign in required</h1>
+        <h1 className="text-2xl font-extrabold text-ink mb-2">Sign in required</h1>
         <p className="text-ink-muted mb-6">Please sign in to view your messages.</p>
         <button onClick={() => navigate('/auth')} className="btn-navy px-6 py-3 rounded-full transition-colors">
           Sign in
@@ -154,11 +154,11 @@ const Messages = () => {
     <div className="pt-24 md:pt-28 pb-10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div variants={fadeUp} initial="hidden" animate="show" className="mb-6">
-          <h1 className="text-3xl md:text-4xl font-bold text-ink">Messages</h1>
+          <h1 className="text-3xl md:text-4xl font-extrabold text-ink">Messages</h1>
           <p className="text-ink-muted mt-1 text-lg">Chat with buyers and sellers.</p>
         </motion.div>
 
-        <div className="flex h-[calc(100vh-220px)] md:h-[620px] surface rounded-2xl overflow-hidden">
+        <div className="flex h-[calc(100vh-220px)] md:h-[620px] surface rounded-4xl overflow-hidden">
           {/* List */}
           <div className={`w-full md:w-80 border-r border-line flex flex-col ${isMobile && activeConversation ? 'hidden md:flex' : ''}`}>
             <div className="p-4 border-b border-line">
@@ -240,7 +240,7 @@ const Messages = () => {
                         transition={{ duration: 0.25 }}
                         className={`flex ${isOwn ? 'justify-end' : 'justify-start'}`}
                       >
-                        <div className={`max-w-[80%] px-4 py-2.5 rounded-xl ${isOwn ? 'bg-navy-600 text-white rounded-br-lg' : 'bg-surface border border-line text-ink rounded-bl-lg'}`}>
+                        <div className={`max-w-[80%] px-4 py-2.5 rounded-3xl ${isOwn ? 'bg-navy-600 text-white rounded-br-lg' : 'bg-surface border border-line text-ink rounded-bl-lg'}`}>
                           <p className="text-sm">{msg.content}</p>
                           <p className={`text-[11px] mt-1 ${isOwn ? 'text-white/60' : 'text-ink-faint'}`}>
                             {new Date(msg.created_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}

@@ -59,7 +59,7 @@ const Layout = () => {
           }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className={`max-w-7xl mx-auto border border-line bg-surface/85 backdrop-blur-xl ${
-            isMobileMenuOpen ? 'rounded-xl' : 'rounded-full'
+            isMobileMenuOpen ? 'rounded-3xl' : 'rounded-full'
           }`}
         >
           <div className="flex items-center justify-between gap-3 h-14 md:h-16 pl-3 pr-2 md:pl-5 md:pr-3">
@@ -67,7 +67,7 @@ const Layout = () => {
               <span className="flex items-center justify-center w-9 h-9 rounded-full bg-navy-600 overflow-hidden">
                 <img src="/images/logo.png" alt="TechMart" className="w-6 h-6 object-contain" />
               </span>
-              <span className="text-lg font-bold tracking-tight text-ink">TechMart</span>
+              <span className="text-lg font-extrabold tracking-tight text-ink">TechMart</span>
             </Link>
 
             {/* Desktop nav */}
@@ -217,14 +217,14 @@ const Layout = () => {
       {/* Footer */}
       <footer className="relative z-10 mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
-          <div className="surface rounded-2xl p-8 md:p-12">
+          <div className="surface rounded-4xl p-8 md:p-12">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="col-span-2 md:col-span-1">
                 <Link to="/" className="flex items-center gap-2.5 mb-4">
                   <span className="flex items-center justify-center w-9 h-9 rounded-full bg-navy-600 overflow-hidden">
                     <img src="/images/logo.png" alt="TechMart" className="w-6 h-6 object-contain" />
                   </span>
-                  <span className="text-lg font-bold tracking-tight text-ink">TechMart</span>
+                  <span className="text-lg font-extrabold tracking-tight text-ink">TechMart</span>
                 </Link>
                 <p className="text-ink-muted text-sm leading-relaxed max-w-xs">
                   A calmer marketplace for tech. Buy, sell, and trade phones, laptops, PCs,

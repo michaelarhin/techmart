@@ -234,7 +234,7 @@ const ListingDetail = () => {
         <span className="w-16 h-16 rounded-2xl surface grid place-items-center text-ink-faint mb-5">
           <Package className="w-7 h-7" />
         </span>
-        <h1 className="text-2xl font-bold text-ink mb-2">Listing not found</h1>
+        <h1 className="text-2xl font-extrabold text-ink mb-2">Listing not found</h1>
         <p className="text-ink-muted mb-6">This listing may have been removed or never existed.</p>
         <Link to="/marketplace" className="btn-navy px-6 py-3 rounded-full transition-colors">
           Browse marketplace
@@ -281,7 +281,7 @@ const ListingDetail = () => {
             transition={{ duration: 0.5, ease: EASE }}
             className="space-y-3"
           >
-            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden surface p-2">
+            <div className="relative aspect-[4/3] rounded-4xl overflow-hidden surface p-2">
               <div className="relative w-full h-full rounded-[1.6rem] overflow-hidden bg-canvas">
                 {listing.images.length > 0 ? (
                   <>
@@ -360,9 +360,9 @@ const ListingDetail = () => {
             className="space-y-5"
           >
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">{listing.title}</h1>
+              <h1 className="text-3xl md:text-4xl font-extrabold text-ink mb-3">{listing.title}</h1>
               <div className="flex items-center flex-wrap gap-3">
-                <p className="text-3xl font-bold text-ink">
+                <p className="text-3xl font-extrabold text-ink">
                   {formatPrice(listing.price)}
                   {listing.price_max && listing.price_max > listing.price && (
                     <span className="text-ink-muted"> — {formatPrice(listing.price_max)}</span>
@@ -441,7 +441,7 @@ const ListingDetail = () => {
             </div>
 
             {isOwner && daysLeft !== null && (
-              <div className={`rounded-xl p-4 ${expiringSoon ? 'bg-amber-500/10 border border-amber-500/40' : 'surface'}`}>
+              <div className={`rounded-3xl p-4 ${expiringSoon ? 'bg-amber-500/10 border border-amber-500/40' : 'surface'}`}>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                   <span className={`w-10 h-10 rounded-2xl grid place-items-center shrink-0 ${expiringSoon ? 'bg-amber-500/20 text-amber-600' : 'surface-muted text-ink-soft'}`}>
                     <CalendarClock className="w-5 h-5" />
@@ -536,13 +536,13 @@ const ListingDetail = () => {
               </div>
             )}
 
-            <div className="surface rounded-xl p-6">
+            <div className="surface rounded-3xl p-6">
               <h3 className="font-bold text-ink mb-2">Description</h3>
               <p className="text-ink-soft whitespace-pre-wrap leading-relaxed">{listing.description}</p>
             </div>
 
             {listing.specs && Object.keys(listing.specs).length > 0 && (
-              <div className="surface rounded-xl p-6">
+              <div className="surface rounded-3xl p-6">
                 <h3 className="font-bold text-ink mb-3">Specifications</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5">
                   {Object.entries(listing.specs).map(([key, value]) => (
@@ -555,7 +555,7 @@ const ListingDetail = () => {
               </div>
             )}
 
-            <div className="surface rounded-xl p-6">
+            <div className="surface rounded-3xl p-6">
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-2xl bg-navy-600 grid place-items-center text-white text-xl font-bold">
                   {listing.profiles?.full_name?.charAt(0) || 'U'}
@@ -631,7 +631,7 @@ const ListingDetail = () => {
         >
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-2xl font-bold text-ink">Seller reviews</h2>
+              <h2 className="text-2xl font-extrabold text-ink">Seller reviews</h2>
               <p className="text-ink-muted">
                 {listing.profiles?.full_name || 'Seller'} has {reviews.length} review{reviews.length === 1 ? '' : 's'}
                 {reviews.some((r) => r.recommend != null) && (
@@ -651,7 +651,7 @@ const ListingDetail = () => {
           </div>
 
           {reviews.length === 0 ? (
-            <div className="surface rounded-2xl text-center py-16">
+            <div className="surface rounded-4xl text-center py-16">
               <span className="w-14 h-14 mx-auto rounded-2xl surface-muted grid place-items-center text-ink-faint mb-4">
                 <Star className="w-7 h-7" />
               </span>
@@ -683,10 +683,10 @@ const ListingDetail = () => {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 12 }}
               transition={{ duration: 0.3, ease: EASE }}
-              className="w-full max-w-md bg-surface rounded-2xl p-6 shadow-lift"
+              className="w-full max-w-md bg-surface rounded-4xl p-6 shadow-lift"
               onClick={(e) => e.stopPropagation()}
             >
-              <h3 className="text-xl font-bold text-ink mb-4">Contact seller</h3>
+              <h3 className="text-xl font-extrabold text-ink mb-4">Contact seller</h3>
               <form onSubmit={handleSendMessage}>
                 <textarea
                   value={message}
@@ -724,10 +724,10 @@ const ListingDetail = () => {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 12 }}
               transition={{ duration: 0.3, ease: EASE }}
-              className="w-full max-w-md bg-surface rounded-2xl p-6 shadow-lift"
+              className="w-full max-w-md bg-surface rounded-4xl p-6 shadow-lift"
               onClick={(e) => e.stopPropagation()}
             >
-              <h3 className="text-xl font-bold text-ink mb-4">Leave a review</h3>
+              <h3 className="text-xl font-extrabold text-ink mb-4">Leave a review</h3>
               <form onSubmit={handleSubmitReview}>
                 <div className="flex items-center justify-center gap-2 mb-4">
                   {[...Array(5)].map((_, i) => (
@@ -794,10 +794,10 @@ const ListingDetail = () => {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 12 }}
               transition={{ duration: 0.3, ease: EASE }}
-              className="w-full max-w-md bg-surface rounded-2xl p-6 shadow-lift"
+              className="w-full max-w-md bg-surface rounded-4xl p-6 shadow-lift"
               onClick={(e) => e.stopPropagation()}
             >
-              <h3 className="text-xl font-bold text-ink mb-2">Report this listing</h3>
+              <h3 className="text-xl font-extrabold text-ink mb-2">Report this listing</h3>
               <p className="text-sm text-ink-muted mb-4">Help us keep TechMart safe. What's wrong?</p>
               <div className="flex flex-col gap-2 mb-4">
                 {['Scam or fraud', 'Fake/misleading photos', 'Stolen item', 'Inappropriate content', 'Other'].map((r) => (

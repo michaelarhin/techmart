@@ -53,7 +53,7 @@ const Admin = () => {
   if (!authLoading && !user) {
     return (
       <div className="min-h-screen pt-28 flex flex-col items-center justify-center text-center px-4">
-        <h1 className="text-2xl font-bold text-ink mb-2">Sign in required</h1>
+        <h1 className="text-2xl font-extrabold text-ink mb-2">Sign in required</h1>
         <button onClick={() => navigate('/auth')} className="btn-navy px-6 py-3 rounded-full mt-2">Sign in</button>
       </div>
     );
@@ -65,7 +65,7 @@ const Admin = () => {
         <span className="w-16 h-16 rounded-2xl surface grid place-items-center text-ink-faint mb-5">
           <ShieldCheck className="w-7 h-7" />
         </span>
-        <h1 className="text-2xl font-bold text-ink mb-2">Admins only</h1>
+        <h1 className="text-2xl font-extrabold text-ink mb-2">Admins only</h1>
         <p className="text-ink-muted mb-6 max-w-sm">This area is for reviewing seller verifications. Ask an existing admin to grant you access.</p>
         <button onClick={() => navigate('/')} className="btn-navy px-6 py-3 rounded-full">Back home</button>
       </div>
@@ -77,16 +77,16 @@ const Admin = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div variants={fadeUp} initial="hidden" animate="show" className="mb-7">
           <span className="text-xs font-bold uppercase tracking-[0.18em] text-accent">Admin</span>
-          <h1 className="text-3xl md:text-4xl font-bold text-ink mt-1">Verification queue</h1>
+          <h1 className="text-3xl md:text-4xl font-extrabold text-ink mt-1">Verification queue</h1>
           <p className="text-ink-muted mt-1 text-lg">Review Ghana Card submissions and approve trusted sellers.</p>
         </motion.div>
 
         {loading ? (
           <div className="grid gap-4">
-            {[...Array(3)].map((_, i) => <div key={i} className="h-40 rounded-xl surface-muted animate-pulse" />)}
+            {[...Array(3)].map((_, i) => <div key={i} className="h-40 rounded-3xl surface-muted animate-pulse" />)}
           </div>
         ) : rows.length === 0 ? (
-          <div className="surface rounded-2xl text-center py-16">
+          <div className="surface rounded-4xl text-center py-16">
             <span className="w-14 h-14 mx-auto rounded-2xl surface-muted grid place-items-center text-ink-faint mb-4">
               <Inbox className="w-7 h-7" />
             </span>
@@ -104,7 +104,7 @@ const Admin = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.97 }}
                   transition={{ duration: 0.3, ease: EASE }}
-                  className="surface rounded-xl p-5 flex flex-col sm:flex-row gap-5"
+                  className="surface rounded-3xl p-5 flex flex-col sm:flex-row gap-5"
                 >
                   {r.ghana_card_image && (
                     <a href={r.ghana_card_image} target="_blank" rel="noopener noreferrer" className="shrink-0">

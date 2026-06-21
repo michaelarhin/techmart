@@ -38,7 +38,7 @@ const Favorites = () => {
         <span className="w-16 h-16 rounded-2xl surface grid place-items-center text-ink-faint mb-5">
           <Heart className="w-7 h-7" />
         </span>
-        <h1 className="text-2xl font-bold text-ink mb-2">Sign in required</h1>
+        <h1 className="text-2xl font-extrabold text-ink mb-2">Sign in required</h1>
         <p className="text-ink-muted mb-6">Please sign in to view your favorites.</p>
         <button onClick={() => navigate('/auth')} className="btn-navy px-6 py-3 rounded-full transition-colors">
           Sign in
@@ -51,7 +51,7 @@ const Favorites = () => {
     <div className="pt-24 md:pt-28 pb-10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div variants={fadeUp} initial="hidden" animate="show">
-          <h1 className="text-3xl md:text-4xl font-bold text-ink">Favorites</h1>
+          <h1 className="text-3xl md:text-4xl font-extrabold text-ink">Favorites</h1>
           <p className="text-ink-muted mt-1 text-lg">
             {favorites.length} saved item{favorites.length !== 1 ? 's' : ''}
           </p>
@@ -60,14 +60,14 @@ const Favorites = () => {
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="h-80 rounded-xl surface-muted animate-pulse" />
+              <div key={i} className="h-80 rounded-3xl surface-muted animate-pulse" />
             ))}
           </div>
         ) : favorites.length === 0 ? (
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            className="surface rounded-2xl text-center py-20 px-6 mt-8"
+            className="surface rounded-4xl text-center py-20 px-6 mt-8"
           >
             <span className="w-14 h-14 mx-auto rounded-2xl surface-muted grid place-items-center text-ink-faint mb-4">
               <Heart className="w-7 h-7" />

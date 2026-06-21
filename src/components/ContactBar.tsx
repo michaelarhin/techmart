@@ -134,7 +134,7 @@ const ContactBar: React.FC<ContactBarProps> = ({ name, phone, email, onMessage, 
   if (items.length === 0) return null;
 
   return (
-    <div className="surface rounded-xl p-6">
+    <div className="surface rounded-3xl p-6">
       <h3 className="font-bold text-ink mb-1">Reach {name.split(' ')[0] || 'the seller'}</h3>
       <p className="text-sm text-ink-muted mb-4">Tap an option to get in touch directly.</p>
       <div className="flex flex-wrap gap-5">

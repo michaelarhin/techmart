@@ -43,7 +43,7 @@ const OnboardingTour = () => {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -12, scale: 0.96 }}
           transition={{ duration: 0.35, ease: EASE }}
-          className="w-full max-w-sm bg-surface rounded-2xl p-8 text-center shadow-lift relative"
+          className="w-full max-w-sm bg-surface rounded-4xl p-8 text-center shadow-lift relative"
         >
           <button
             onClick={finish}
@@ -57,7 +57,7 @@ const OnboardingTour = () => {
             <current.icon className="w-7 h-7" />
           </span>
 
-          <h2 className="text-xl font-bold text-ink mb-2">{current.title}</h2>
+          <h2 className="text-xl font-extrabold text-ink mb-2">{current.title}</h2>
           <p className="text-ink-muted leading-relaxed mb-6">{current.body}</p>
 
           {/* Progress dots */}

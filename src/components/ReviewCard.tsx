@@ -6,7 +6,7 @@ const ReviewCard = ({ review }: { review: Review }) => (
   <motion.div
     initial={{ opacity: 0, y: 10 }}
     animate={{ opacity: 1, y: 0 }}
-    className="surface rounded-xl p-6"
+    className="surface rounded-3xl p-6"
   >
     <div className="flex items-center gap-3 mb-3">
       <div className="w-10 h-10 rounded-full bg-navy-600 grid place-items-center text-white font-bold shrink-0">
