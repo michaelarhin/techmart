@@ -25,6 +25,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ listing, compact = false }) =
     ? Math.ceil((new Date(listing.expires_at).getTime() - Date.now()) / 86400000)
     : null;
   const expiringSoon = daysLeft !== null && daysLeft > 0 && daysLeft <= 7 && !listing.is_sold;
+  const isExpired = daysLeft !== null && daysLeft <= 0 && !listing.is_sold;
 
   return (
     <motion.div
@@ -67,6 +68,11 @@ const ListingCard: React.FC<ListingCardProps> = ({ listing, compact = false }) =
               {expiringSoon && (
                 <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-500 text-white">
                   {daysLeft}d left
+                </span>
+              )}
+              {isExpired && (
+                <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-ink-faint/80 text-white">
+                  May be outdated
                 </span>
               )}
             </div>

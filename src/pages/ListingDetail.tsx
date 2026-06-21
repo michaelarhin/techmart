@@ -248,7 +248,8 @@ const ListingDetail = () => {
     listing.expires_at != null
       ? Math.ceil((new Date(listing.expires_at).getTime() - Date.now()) / 86400000)
       : null;
-  const expiringSoon = daysLeft !== null && daysLeft <= 7;
+  const expiringSoon = daysLeft !== null && daysLeft <= 7 && daysLeft > 0;
+  const isExpired = daysLeft !== null && daysLeft <= 0;
 
   return (
     <div className="pt-24 md:pt-28 pb-10">
@@ -393,6 +394,16 @@ const ListingDetail = () => {
               )}
             </div>
 
+            {isExpired && !isOwner && (
+              <div className="rounded-2xl bg-amber-500/10 border border-amber-500/30 px-4 py-3 flex items-start gap-3">
+                <CalendarClock className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm font-semibold text-amber-700">This listing may be outdated</p>
+                  <p className="text-xs text-amber-600 mt-0.5">It was posted over 30 days ago and hasn't been renewed. Contact the seller to check if it's still available.</p>
+                </div>
+              </div>
+            )}
+
             <div className="flex gap-3">
               {!isOwner && (
                 <>
@@ -437,7 +448,7 @@ const ListingDetail = () => {
                   </span>
                   <div className="flex-1">
                     <p className="font-semibold text-ink text-sm">
-                      {daysLeft > 0 ? `Your listing is live for ${daysLeft} more day${daysLeft === 1 ? '' : 's'}` : 'This listing has expired'}
+                      {daysLeft > 0 ? `Your listing is live for ${daysLeft} more day${daysLeft === 1 ? '' : 's'}` : 'Your listing is showing as outdated to buyers — renew it to remove the warning'}
                     </p>
                     <p className="text-xs text-ink-muted mt-0.5">
                       Listings run for 30 days. Renew to keep it visible — we'll also email/text you before it disappears.
