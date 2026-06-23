@@ -243,7 +243,7 @@ const Layout = () => {
               <div>
                 <h4 className="font-bold text-ink mb-4 text-sm">Account</h4>
                 <ul className="space-y-2.5 text-sm text-ink-muted">
-                  <li><Link to="/auth" className="hover:text-ink transition-colors">Sign in</Link></li>
+                  <li><Link to={user ? "/profile" : "/auth"} className="hover:text-ink transition-colors">{user ? "My profile" : "Sign in"}</Link></li>
                   <li><Link to="/create" className="hover:text-ink transition-colors">Sell an item</Link></li>
                   <li><Link to="/favorites" className="hover:text-ink transition-colors">Favorites</Link></li>
                   <li><Link to="/messages" className="hover:text-ink transition-colors">Messages</Link></li>
