@@ -4,7 +4,14 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = 'https://bsdcskvwqwadcoplklir.supabase.co';
 const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJzZGNza3Z3cXdhZGNvcGxrbGlyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwMzc0NDQsImV4cCI6MjA5NjYxMzQ0NH0.6wd9jgyJthAJByl2LDiuNdAdbeavOzhh-9GmATP9SQM';
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    persistSession: true,
+    storageKey: 'techmart-auth',
+    autoRefreshToken: true,
+    detectSessionInUrl: true,
+  },
+});
 
 // --- Profiles ---
 
