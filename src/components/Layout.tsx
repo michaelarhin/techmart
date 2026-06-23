@@ -277,12 +277,12 @@ const Layout = () => {
                 <img
                   src="/images/nmp-technologies-dark.png"
                   alt="NMP Technologies"
-                  className="h-12 w-auto object-contain rounded-md dark:hidden"
+                  className="h-10 w-28 object-contain dark:hidden"
                 />
                 <img
                   src="/images/nmp-technologies-white.png"
                   alt="NMP Technologies"
-                  className="h-12 w-auto object-contain rounded-md hidden dark:block"
+                  className="h-10 w-28 object-contain hidden dark:block"
                 />
               </div>
             </div>
