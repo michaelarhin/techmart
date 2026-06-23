@@ -274,16 +274,18 @@ const Layout = () => {
               </div>
               <div className="flex items-center justify-center gap-3 pt-1">
                 <span className="text-ink-faint text-sm">Developed by</span>
-                <img
-                  src="/images/nmp-technologies-dark.png"
-                  alt="NMP Technologies"
-                  className="h-10 w-28 object-contain dark:hidden"
-                />
-                <img
-                  src="/images/nmp-technologies-white.png"
-                  alt="NMP Technologies"
-                  className="h-10 w-28 object-contain hidden dark:block"
-                />
+                <div className="h-10 w-32 relative">
+                  <img
+                    src="/images/nmp-technologies-dark.png"
+                    alt="NMP Technologies"
+                    className="absolute inset-0 h-full w-full object-contain dark:hidden"
+                  />
+                  <img
+                    src="/images/nmp-technologies-white.png"
+                    alt="NMP Technologies"
+                    className="absolute inset-0 h-full w-full object-contain hidden dark:block"
+                  />
+                </div>
               </div>
             </div>
           </div>
