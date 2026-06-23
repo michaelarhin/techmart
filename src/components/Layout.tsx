@@ -275,9 +275,14 @@ const Layout = () => {
               <div className="flex items-center justify-center gap-3 pt-1">
                 <span className="text-ink-faint text-sm">Developed by</span>
                 <img
-                  src="/images/nmp-technologies.png"
+                  src="/images/nmp-technologies-dark.png"
                   alt="NMP Technologies"
-                  className="h-12 w-auto object-contain rounded-md"
+                  className="h-12 w-auto object-contain rounded-md dark:hidden"
+                />
+                <img
+                  src="/images/nmp-technologies-white.png"
+                  alt="NMP Technologies"
+                  className="h-12 w-auto object-contain rounded-md hidden dark:block"
                 />
               </div>
             </div>
